@@ -1,0 +1,233 @@
+1.what is ansible?
+A.Ansible is the simplest way to automate apps and IT infrastructure.
+ Application Deployment + Configuration Management + Continuous Delivery.
+
+2.what is configuration management tool?
+A.The Importance of Configuration Management. Configuration management (CM) focuses on establishing and maintaining consistency of a product's
+ performance, and its functional and physical attributes with its requirements, design, and operational information throughout its life.
+
+3.Is Ansible only a tool for configuration management?
+A.chef,puppet,salt and ansible.
+
+4.what are the components of ansible?
+A.Ansible components
+Inventory. The “inventory” is a configuration file where you define the host information. ...
+Playbooks.
+Plays. Playbooks contain plays. ...
+Tasks. Tasks are actions carried out by playbooks. ...
+Roles. A role is the Ansible way of bundling automation content and making it reusable. ...
+Handlers. ...
+Templates. ...
+Variables.
+
+5.how Ansible works?
+A.Ansible works by connecting to your nodes and pushing out small programs, 
+called "Ansible modules" to them. These programs are written to be resource models of the desired state of the system.
+ Ansible then executes these modules (over SSH by default), and removes them when finished.
+
+6.what are the other tools in the market other than Ansible?
+A. Ansible, CHEF enterprise version, Octopus, TeamCity etc. These tools provide reliable deployment process and support multiple OS platforms.
+
+7.how ansible is different from chef and puppet?
+A.The difference between Ansible and the above configuration management tools 
+(Puppet, Chef) is that they probably have a better set of features, 
+but Ansible is far simpler than them. ... Powered by Red Hat,
+ Ansible Tower enables users to manage and control the multi-tier deployments in a secure manner.
+
+8.what is inventory in ansible?
+A.The Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, 
+and tasks in a playbook operate. The file can be in one of many formats depending on your Ansible environment and plugins. 
+... If necessary, you can also create project-specific inventory files in alternate locations.
+
+9.what are the types of inventories?
+A.Generally, inventory types can be grouped into four classifications: raw material, 
+work-in-process, finished goods, and MRO goods.
+
+10.what is play &playbook?
+A.A Playbook is a list of plays. It can contain a single play, or many.
+ A Play is a list of tasks and roles that should be run.
+ A Play can also define vars that should be used for that play.
+
+11.Difference between Hosts &groups?
+A.Ansible uses a combination of a hosts file and a group_vars directory 
+to pull variables per host group and run Ansible plays/tasks against hosts.
+
+12.what is roles?
+A.Roles provide a framework for fully independent, or interdependent collections of variables, tasks, files, templates, and modules.
+ In Ansible, the role is the primary mechanism for breaking a playbook into multiple files. 
+This simplifies writing complex playbooks, and it makes them easier to reuse.
+
+13.how to install a role?
+A.ansible-galaxy init <rolename>
+ansible-galaxy install username.role_name
+
+14.how to install multiple roles?
+A.ansible-galaxy install -r requirements.yml
+
+15.how to create roles?
+A.
+
+16.what is Dynamic inventory & when we use it & for what?
+A.Without a dynamic inventory users are forced to maintain host mappings manually which can be tedious 
+when you have many hosts that are constantly terminating and provisioning.
+ Each time you execute Ansible, it generates a new inventory file based on the output of the dynamic inventory script
+
+The dynamic inventory script can do anything to get the data (call an external API, pull information from a database or file, etc.),
+ and Ansible will use it as an inventory source as long as it returns a JSON structure like the one above
+ when the script is called with the --list 
+
+17.where is the ansible configuration file located?
+A./etc/ansible/ansible.cfg
+
+18.what are the different ways other than ssh by which ansible can connect to remote hosts?
+A.By default, Ansible ships with several plugins. The most commonly used are 
+the paramiko SSH, native ssh (just called ssh), and local connection types. 
+All of these can be used in playbooks and with /usr/bin/ansible to decide how you want to talk to remote machines.
+
+19.what is variable in ansible?
+A.Variable in playbooks are very similar to using variables in any programming language.
+ It helps you to use and assign a value to a variable and use that anywhere in the playbook. 
+One can put conditions around the value of the variables and accordingly use them in the playbook.
+
+20.what are different types of variables?
+A.Ansible has 3 main scopes: Global: this is set by config, environment variables and the command line.
+ Play: each play and contained structures, vars entries, include_vars, role defaults and vars.
+ Host: variables directly associated to a host, like inventory, facts or registered task outputs.
+
+21.how to assign variables in group vars & hosts vars?
+A.- name: Install Kafka
+  hosts: kafka
+  roles: 
+    - role: kafka
+      kafka_hosts: "{{ groups['kafka'] | list }}"
+      kafka_zookeeper_hosts: "{{ groups['zookeeper'] | list }}"
+
+  kafka_hosts: 
+    - 192.168.48.1
+    - 192.168.48.2
+    - 192.168.48.3
+  kafka_zookeeper_hosts: 
+    - 192.168.48.4
+    - 192.168.48.5
+    - 192.168.48.6
+
+22.difference between file & template directory in roles?
+A.Most directories contain a main.yml file; Ansible uses each of those files as the entry point for reading 
+the contents of the directory (except for files, templates, and test). You have the freedom to branch your tasks and variables 
+into other files within each directory.
+
+23.difference between default & vars directory in Roles?
+A.Role default variables allow you to set default variables for included or dependent roles (see below). 
+To create defaults, simply add a defaults/main.yml file in your role directory. 
+These variables will have the lowest priority of any variables available, and can be easily overridden by 
+any other variable, including inventory variables.
+
+24.what is jinja2 template?
+A.Jinja2 is a modern day templating language for Python developers. It was made after Django's template.
+ It is used to create HTML, XML or other markup formats that are returned to the user via an HTTP request.
+
+25.what is modules in ansible?
+A.Ansible ships with a number of modules (called the 'module library') that can be executed directly on remote hosts or through Playbooks.
+ Users can also write their own modules. These modules can control system resources,
+ like services, packages, or files (anything really), or handle executing system commands.
+
+26.difference between COPY & FILE modules?
+A.Ansible provides the basic functionality of copying files and directories through the copy and fetch modules. 
+You can use the copy module to copy files and folders from the local server to the remote servers, 
+between remote servers(only files), change the permission of the files, etc
+
+27.difference between SHELL & COMMAND modules?
+A.In the most use cases both modules lead to the same goal. Here are the main differences between these modules. 
+With the Command module the command will be executed without being proceeded through a shell.
+
+COMMAND:With the Command module the command will be executed without being proceeded through a shell. 
+As a consequence some variables like $HOME are not available. 
+And also stream operations like  <, >, | and & will not work.
+
+SHELL:The Shell module runs a command through a shell, by default /bin/sh. 
+This can be changed with the option executable. Piping and redirection are here therefor available.
+The command module is more secure, because it will not be affected by the user’s environment.
+
+28.what is setup module? what it does?
+A.Ansible – “setup” module is responsible to gather facts of the remote hosts. The system facts
+ are nothing but the system configuration which includes the hostname, IP address, filesystems, 
+OS releases, Users, Network parameters, CPU, memory and many more
+
+29.what is register and debug in Ansible?
+A.Ansible registers are used when you want to capture the output of a task to a variable.
+ You can then use the value of these registers for different scenarios like a conditional statement,
+ logging etc. ... The common return values are documented in Ansible docs.
+
+REGISTER IN ANSIBLE:
+A. ansible register module is used to capture or store the output of the command or task.
+ By using the register module, you can store that output into any variable.
+
+DEBUG inAnsible:
+The debug module is well known. It is the Ansible equivalent to a print line in 
+Python code that you add now and then to see some variable values when debugging your scripts
+
+30.can we disable automatic facts gathering in Ansible?
+A:gather_facts: no
+
+31.how error handling can be done in ansible?
+A.Error Handling In Playbooks. Ansible normally has defaults that make sure to check 
+the return codes of commands and modules and it fails fast – forcing an error to be dealt with unless you decide otherwise.
+ ... Sometimes a command might not always need to report that it 'changed' the remote system.
+
+32.how to ignore failed commands inansible?
+A.- name: This task sometimes fails
+  shell: fail_me!
+  ignore_errors: "{{ when_errno32 }}"
+
+ I have a playbook to clean up resources, and I want the playbook to ignore every error and
+ keep going on till the end , and then fail at the end if there were errors
+
+ignore_errors: yes
+
+- name: this command prints FAILED when it fails
+  command: /usr/bin/example-command -x -y -z
+  register: command_result
+  ignore_errors: True
+
+- name: fail the play if the previous command did not succeed
+  fail: msg="the command failed"
+  when: "'FAILED' in command_result.stderr"
+
+33.what is Handlers? why we use handlers in ansible?
+A.Handlers can be used for things other than service restarts, but service restarts are the most common usage. 
+A host is simply a remote machine that Ansible manages.
+ They can have individual variables assigned to them, and can also be organized in groups.
+
+34.what is privilege Escalation in Ansible?
+A.Ansible can use existing privilege escalation systems to allow a user to
+ execute tasks as another. Topics. Become (Privilege Escalation).
+
+Ansible allows you to ‘become’ another user, different from the user that
+ logged into the machine (remote user). This is done using existing privilege escalation tools, 
+which you probably already use or have configured, like sudo, su, pfexec, doas, pbrun, dzdo, ksu, and others.
+
+
+35.task to connect (SSH) Ansiable to remote host using another user &Run the playbook to the remote host
+using with another user?
+A.
+
+36.what is ansible vault?
+A.Ansible Vault is a feature of ansible that allows you to keep sensitive data such as passwords or 
+keys in encrypted files, rather than as plaintext in playbooks or roles. ... Alternately, 
+you may specify the location of a password file or command Ansible to always prompt for the password in your ansible.cfg file.
+
+37.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
