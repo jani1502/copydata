@@ -1,0 +1,142 @@
+1.what is jenkins?
+A.Continuous Integration is the most important part of DevOps that is used to integrate various DevOps stages. 
+... Jenkins is an open source automation tool written in Java with plugins built for Continuous Integration purpose. 
+... Jenkins achieves Continuous Integration with the help of ...
+
+2.why we use jenkins?
+A.Jenkins is an open source automation tool written in Java with plugins built for Continuous Integration purpose. 
+Jenkins is used to build and test your software projects continuously making it easier for developers to integrate changes to the project, 
+and making it easier for users to obtain a fresh build
+
+3.what are the other tools/technologies present in market other than jenkins foe CI/CD?
+A.Jenkins vs. ... integration ,jenkins ,bamboo ,teamcity ,travis ci ,gitlab ,circleci ,codeship 
+
+4.how to move jenkins from one server to another?
+A.One option (and seems to be the recommended one) is to just copy the jobs directory from the old server to the new one. 
+From the documentation Moving/copying/renaming jobs: You can: Move a job from one installation of Jenkins to 
+another by simply copying the corresponding job directory.
+
+5.how to create jenkins backup?
+A.Step 1 - Click on Manage Jenkins and choose the 'Manage Plugins' option.
+Step 2 - In the available tab, search for 'Backup Plugin'. ...
+Step 3 - Now when you go to Manage Jenkins, and scroll down you will see 'Backup Manager' as an option. ...
+Step 4 - Click on Setup.
+
+6.what are the pluguns in jenkins?
+A.Global Build Stats Plugin,Job GeneratorPlugin,Disable-failed-job,GitHub/GitLab Pull Request Builder,Hudson Extended Read Permission Plugin,
+Post+build+task,JDK Parameter Plugin,Job Configuration History Plugin.
+
+7.what are the default pluguins installed in jenkins?
+A.git, maven/ant,
+
+
+8.how to scheduled builds in jenkins?
+A.Build periodically ,
+Under the job configuration we can define various build triggers.
+ Simple find the ‘Build Triggers’ section, and check the ‘ Build Periodically’ checkbox. 
+ With the periodically build you can schedule the build definition by the date or day of the week and the time to execute the build.
+
+9.difference between Ant,maven,Gradle?
+A.Ant was the first among “modern” build tools. In many aspects it is similar to Make
+Maven was released in 2004. Its goal was to improve upon some of the problems developers were facing when using Ant.
+Gradle does not use XML. Instead, it had its own DSL based on Groovy (one of JVM languages). As a result, 
+Gradle build scripts tend to be much shorter and clearer than those written for Ant or Maven.
+
+10.difference between jenkins,teamcity,bamboo?
+A.Bamboo is comparable and in its ease of use, but the UI is not quite as pretty, 
+and G2 Crowd ranks TeamCity higher than Bamboo for “Ease of Setup”. 
+Jenkins falls short of both TeamCity and Bamboo in this category. 
+Jenkins' UI is a little more old school, but the new Blue Ocean interface was a major upgrade
+
+11.how to configure a cloud access in jenkins?
+A.Configure the Google Compute Engine plugin with the credentials it uses to provision your agent instances.
+In the leftmost menu of the Jenkins UI, select Manage Jenkins.
+Click Configure System.
+Scroll to the bottom of the page and click Add a new Cloud.
+Click Google Compute Engine.
+
+12.what is jenkins slaves?
+A.Jenkins Slave. A Slave is a Java executable that runs on a remote machine. 
+Following are the characteristics of Jenkins Slaves: It hears requests from the Jenkins Master instance. 
+Slaves can run on a variety of operating systems
+
+13.how to run a groovy script in jenkins?
+A.first install groovy plugins-->go to jenkins configuration tools--->
+To create Groovy-based project, add new free-style project and select "Execute Groovy script" in the Build section,
+ select previously configured Groovy installation and then type your command, or specify your script file name.
+ In the second case path taken is relatively from the project workspace directory
+
+
+14.what is jenkins pipeline?
+A.Jenkins Pipeline is a combination of plugins that support the integration and implementation of
+ continuous delivery pipelines using Jenkins. 
+A pipeline has an extensible automation server for creating simple or 
+complex delivery pipelines "as code," via pipeline DSL (Domain-specific Language).
+
+15.what are the different types of jenkins pipeline?
+A.Declarative versus Scripted pipeline syntax: There are two types of syntax used for defining your JenkinsFile.  
+Declarative: Declarative pipeline syntax offers an easy way to create pipelines.
+Declarative:
+
+Declarative pipeline syntax offers an easy way to create pipelines. 
+It contains a predefined hierarchy to create Jenkins pipelines. 
+It gives you the ability to control all aspects of a pipeline execution in a simple, straight-forward manner.
+
+Scripted:
+
+Scripted Jenkins pipeline runs on the Jenkins master with the help of a lightweight executor. 
+It uses very few resources to translate the pipeline into atomic commands. 
+Both declarative and scripted syntax are different from each other and are defined totally differently.
+
+
+16.Is jenkins as CI tool or both CI/CD?
+A.CI = Continuous Integration is the process where you get the source code of your applications 
+and all its dependencies to see if they work properly together. 
+In the case if compiled languages (Java, C, C++),
+ you compile to see if you can generate the executable. ... Jenkins is the most popular CI/CD server.
+
+17.how to install jenkins with non root access in linux?
+A.
+
+
+18.how to assign roles to users in jenkins?
+A.Assign Users to the new Group (Role) After creating the roles (either global role, or project role)
+ with appropriate permissions, 
+the next step is to assign users to this role. For this, 
+go to “Manage Jenkins” -> “Manage and Assign Roles” -> Click on “Assign Roles.
+
+19.How do i make a jenkins file read only?
+A.Go to Jenkins -> Manage Jenkins -> Configure Global Security.
+Check "Enable security".
+Set "Jenkins own user database" as security realm.
+Check "Allow users to sign up"
+Choose "Matrix based security"
+Check "Overall read" on Anonymous.
+Add your admin account in the matrix, check every box.
+
+20.if you have 200 employes inyour company, how you can assign jenkins access to 
+these employee how you can give permission in jenkins?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,87 @@
+1.what is Git?
+A.Git is a distrubuted version control system, Every dev has a working copy of the code and full change history on their local machine.
+
+2.what is difference between git and github?
+A.git is a revision control sytem, a tool to manage your source code history.
+GitHUb is a hosting service for Git repositories
+Git is the tool,
+GitHub is the service for projects that use Git.
+
+
+3.why we use Git?
+A.Git makes it easy. Git simplifies the process of working with other people and makes it easy to collaborate on projects.
+ Team members can work on files and easily merge their changes in with the master branch of the project.
+ This allows multiple people to work on the same files at the same time.
+
+4.what is SCM and VCS?
+A. Version Control System (VCS), also known as Source Control Management (SCM),
+ is a way to manage and document changes developers make to software code.
+
+5.what is git reset and revert?
+A.git revert can only be run at a commit level scope and has no file level functionality. 
+A reset is an operation that takes a specified commit and resets the "three trees" to match the state of the repository at that specified commit. 
+A reset can be invoked in three different modes which correspond to the three trees.
+
+
+6.what are process of pushing the code to github repository?
+A.Git init-->Git add file name -->git commit -m "hello"-->git remote add origin <url>-->git push origin.
+
+
+7.what are the commands of Git to push  the code?
+A.git push -u(--set-upstream), --all, -f (--force).
+
+8.how you can merge a git repository with another?
+A.take two repositories A and B, repositories B merge wuth A.
+step1:local machine-->git clone A repositories Url
+step2:git fetch B(repositoryname)
+step3:check-->git remote -v  ---two repositories.
+step4:create branch of B resotories-->git checkout -b B B/master
+step5:enter into B branch-->git checkout B
+step6:make directory any name -->move all files of branch B into directory.
+step7:go to master branch -->git checkout master-->then -->git merge Bbranch.
+step8:git commmit-m "hk"-->git push origin master.
+
+
+9.what is branching in git?
+A.A branch in Git is simply a lightweight movable pointer to one of these commits. 
+The default branch name in Git is master. As you initially make commits, 
+you're given a master branch that points to the last commit you made. ... Multiple branches pointing into the commit's data history.
+
+10.Different types of branching in Git?
+A.Branches on Local Machine. 
+1- Local branch can split into two types of branches: non-tracking local branch and local tracking branch. ...
+Branches on Remote machine. 
+Remote branch is a branch located on a remote machine or server. ...
+
+
+11.what is merge conflict in git?
+A.How a Merge Conflict Occurs. In Git, "merging" is the act of integrating another branch into your current working branch. 
+You're taking changes from another context (that's what a branch effectively is: a context) and combine them with your current working files.
+
+12.how you can resolve merge conflict if you are merging same project and in the same branch?
+A. if you edited a file, such as README.md, and another person removed the same file in another branch in the same Git repository, 
+you'll get a merge conflict error when you try to merge these branches. 
+You must resolve this merge conflict with a new commit before you can merge these branches.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,251 @@
+1.what is docker?
+A.Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. 
+Containers allow a developer to package up an application with all of the parts it needs,
+ such as libraries and other dependencies, and ship it all out as one package.
+
+2.difference between container &vms?
+A.
+
+3.difference between docker and virtualization?
+A.Docker isn't a virtualization methodology. ... Docker primarily focuses on automating the deployment 
+of applications inside application containers. Application containers are designed to
+ package and run a single service, whereas system 
+containers are designed to run multiple processes, like virtual machines.
+
+4.difference between container and image?
+A.An image is an inert, immutable, file that's essentially a snapshot of a container.
+ Images are created with the build command, and they'll produce a container when started with run.
+ Images are stored in a Docker registry such as registry.hub.docker.com.
+
+
+5.how image builds?
+A.The docker build command processes this file generating a Docker Image in your Local Image Cache, 
+which you can then start-up using the docker run command, or push to a permanent Image Repository.
+
+6.what are image layers?
+A.Docker containers are building blocks for applications. Each container is an image with a 
+readable/writeable layer on top of a bunch of read-only layers. These layers (also called intermediate images) 
+are generated when the commands in the Dockerfile are executed during the Docker image build.
+
+7.what is overlayfs?
+A.The overlay filesystem (formally known as overlayfs) was merged into the mainline Linux kernel at version 3.18.
+similar union mount filesystems have been around for many years (notably, aufs), overlay is the first to become integrated into the Linux kernel.
+
+An overlay sits on top of an existing filesystem, and combines an upper and a lower directory tree 
+(which can be from different filesystems), in order to present a unified representation of both directory trees.
+
+File: the object in the upper directory tree appears in the overlay, whilst the object in the lower directory tree is hidden
+Directory: the contents of each directory object are merged to create a combined directory object in the overlay
+
+
+8.where the image layers can be found in which directory?
+A.The writable container layer is on top. The /var/lib/docker/aufs directory points to three other directories: diff , layers and mnt .
+ Image layers and their contents are stored in the diff directory.
+
+9.how can we check the content of each layer?
+A.What are the layers? Docker containers are building blocks for applications. 
+Each container is an image with a readable/writeable layer on top of a bunch of read-only layers. 
+These layers (also called intermediate images) are generated when the commands in the Dockerfile 
+are executed during the Docker image build.
+
+10.how to check the layers stacked with image?
+A.I want to analyze the new layers added by my Dockerfile. To do that, I need to filter and isolate just the new layers, leaving apart 
+every layer that come from the original base image and I do not see a trustful way to do it with response that I get after calling
+
+11.what is union mount &AUFS?
+A.AuFS stands for Another Union File System. AuFS started as an implementation of UnionFS Union File System.
+ An union filesystem takes an existing filesystem and transparently overlays it on a newer filesystem. 
+It allows files and directories of separate filesystem to co-exist under a single roof.
+
+12.why use union mount system for docker?
+A.What exactly does Docker do with Union File system (like AUFS) to create the containers ? 
+If Docker had to use a regular file system instead of a union file system what will be the disadvantages ?
+avoid duplicating a complete set of files each time you run an image as a new container
+isolate changes to a container filesystem in its own layer, allowing for that same container 
+to be restarted from a known content (since the layer with the changes will have been dismissed when the container is removed)
+
+
+13.what are the 3 different directories in /var/lib//docker/aufs?
+A.diff, layers, mnt.
+
+14.how to run image?
+A.docker run --name anyname -d -p 8080:8080 tomcat
+
+15.how to tag an image?
+A.docker tag <imagename> <dockerhubname/imagename>
+
+16.how to link one container with another?
+A.Connect a container to a network when it starts. You can also use the docker run --network=<network-name> option to 
+start a container and immediately connect it to a network.
+
+17.how do you sequence the containers? A first then B should execute after that?
+A.a combination of conditional connectors and a dummy sequence box will achieve the effect :
+
+connect A and B to a sequence box and edit the connector to be a logical OR
+connect the output of the sequence box to D
+connect the output of C to 
+
+18.how to create a volume in docker container to store data?
+A.docker run --name (containername) -v /myvolume(anyname) -d -p 8080:8080 myjenkins:(imagename)
+
+19.how to mount a local directory into a container?
+A.
+cat docker file -->
+FROM ubuntu:trusty
+RUN apt-get update
+RUN apt-get -y install git curl vim
+CMD ["/bin/bash"]       -->
+WORKDIR /test_container  --->default location to work
+VOLUME ["/test_container"]  --->create volume
+
+
+$docker build --tag=k3_s3:latest .
+$docker run -d -v /Users/kishore/main_folder:/test_container k3_s3:latest  -->mount local main_folder storage.
+
+20.how to expose a port no to access container?
+A.$ docker run -i --expose=22 b5593e60c33b bash -->this for running container
+then you can do the command with multiple -p options when run the image.
+$docker run -d -p 5801:5801 -p 5802:5802 ..
+
+21.what is entrypoint in docker?
+A.ENTRYPOINT instruction allows you to configure a container that will run as an executable.
+ It looks similar to CMD, because it also allows you to specify a command with parameters. 
+The difference is ENTRYPOINT command and parameters are not ignored when Docker container runs with command line parameters
+
+RUN executes command(s) in a new layer and creates a new image. E.g., it is often used for installing software packages.
+CMD sets default command and/or parameters, which can be overwritten from command line when docker container runs.
+ENTRYPOINT configures a container that will run as an executable.
+If it doesn’t make much sense or you after details, then read on.
+
+
+22.what is dockerfile?
+A.A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. 
+Using docker build users can create an automated build that executes several command-line instructions in succession.
+ This page describes the commands you can use in a Dockerfile.
+
+23.difference between ADD & COPY parameter in dockerfile?
+A.COPY takes in a src and destination. It only lets you copy in a local file or directory from your host
+ (the machine building the Docker image) into the Docker image itself.
+ADD lets you do that too, but it also supports 2 other sources. First, you can use a URL instead of a 
+local file / directory. Secondly, you can extract a tar file from the source directly into the destination.
+
+24.how to create a bridge in container?
+A.$docker network create -d bridge --subnet 10.10.1.0/24 mynw(bridgenetworkname).
+$brctl show
+$docker network create -d bridge demo-bridge  --->create new bridgenetwork
+
+25.how a container gets an internal IP?
+A.$docker inspect e350390fd549(containerid).
+$docker exec -it e350390fd549 /sbin/ifconfig eth0
+or
+$docker exec -it e350390fd549 ip add show eth0
+or
+cd /var/lib/docker/containers/CONTAINER-ID
+
+26.can we check the process of a container inside as well as outside the container?
+A.To check inside a Docker container if you are inside a Docker container or not can be done via /proc/1/cgroup.
+Outside a docker container all entries in /proc/1/cgroup
+
+27.can we check the container process on dockerhost?
+A.You can use docker top command. This command lists all processes running within your container
+
+28.how kernal isolates to run the container and how resources managed by the kernel?
+A.
+
+29.what is namespace and cgroups?
+A.cgroups limits the resources which a process or set of processes can use these resources could be CPU,Memory,Network I/O or access to filesystem 
+while namespace restrict the visibility of group of processes to the rest of the system
+
+30.what is docker-compose and docker-swarm?
+A.docker-compose.yml: Definition file for a group of containers, used by docker-compose and now also by swarm mode. 
+swarm mode: Used to manage a group of docker engines as a single entity and provide orchestration
+ (constantly trying to correct any differences between the current state and the target state.
+
+docker-compose: Command used to configure and manage a group of related containers.
+ It is a frontend to the same api's used by the docker cli, so you can reproduce it's behavior with commands like docker run.
+
+swarm mode: Used to manage a group of docker engines as a single entity 
+and provide orchestration (constantly trying to correct any differences between the current state and the target state.
+
+31.how you can give different network ip to the container?
+A.
+
+32.what are the parameters of dockerfile?
+A.FROM:-
+MAINTAINER:
+RUN:
+ADD:
+COPY:
+EXPOSE:
+CMD:
+WORKDIR:
+VOLUME:
+ENTRYPOINT:
+
+33.is there any windows container also available?
+A.Windows containers are abstracted, isolated and portable
+ operating environments supported by the Microsoft Windows Server 2016 operating
+ system and managed with tools such as Docker and PowerShell.
+
+34.how to stop a container?
+A.docker stop container ID
+
+35.how to run a container in background?
+A.When starting a Docker container, you must first decide if you want to run the container 
+in the background in a “detached” mode or in the default foreground .
+
+36.how to go inside a container if container is running in background?
+A.docker exec -i -t <image> /bin/bash 
+docker exec -it containerid /bin/bash
+
+37.how to check running containers?
+A.docker ps
+
+38.how to remove an image?
+A.docker rmi imageid/name
+
+39.how to run an image which is in tar format?
+A.docker run \
+  --name mycontainer \
+  --mount source=/path/to/folder/containing/tar/file,target=/target \
+  myimage
+
+40.command to check the process of a container?
+A.docker container top CONTAINER [ps OPTIONS]
+
+41.how to check resource utilisation of a container?
+A.$docker stats --all
+
+42.how to create an image?
+A.docker build -t <anynameof image> .
+
+43.how to save changes of a container?
+A.docker commit <container-id> username/imagename
+
+44.what are registries?
+A.A Docker registry is a storage and distribution system for named Docker images. 
+The same image might have multiple different versions, identified by their tags.
+ A Docker registry is organized into Docker repositories , where a repository holds all the versions of a specific image.
+
+45.difference between docker commands: up,run &start?
+A.docker run	Run a command in a new container.
+  docker start  -->to start container.
+  docker up    -->
+
+46.can we run more than one process in a container?
+A.At all times, there can be only one CMD. You are right, 
+the second Dockerfile will overwrite the CMD command of the first one. 
+Docker will always run a single command, not more. So at the end of your Dockerfile, you can specify one command to run.
+
+A container’s main running process is the ENTRYPOINT and/or CMD at the end of the Dockerfile. 
+It is generally recommended that you separate areas of concern by using one service per container.
+ That service may fork into multiple processes (for example, Apache web server starts multiple worker processes). 
+It’s ok to have multiple processes, but to get the most benefit out of Docker, avoid one container being 
+responsible for multiple aspects of your overall application. 
+You can connect multiple containers using user-defined networks and shared volumes.
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------

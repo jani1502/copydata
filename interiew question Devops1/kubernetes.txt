@@ -1,0 +1,131 @@
+1.what is kubernetes?
+A.Kubernetes is a portable, extensible open-source platform for managing containerized 
+workloads and services, that facilitates both declarative configuration and automation. 
+It has a large, rapidly growing ecosystem. Kubernetes services, support, and tools are widely available.
+
+2.what are kubernetes components?
+A.etcd. It stores the configuration information which can be used by each of the nodes in the cluster. ...
+API Server. ...
+Controller Manager. ...
+Scheduler. .
+cluster store/etcd
+
+3.what is etcd?
+A.etcd. It stores the configuration information which can be used by each of the nodes in the cluster.
+
+Kubernetes uses etcd to store all its data – its configuration data, its state, and its metadata. 
+Kubernetes is a distributed system, so it needs a distributed data store like etcd. 
+etcd lets any of the nodes in the Kubernetes cluster read and write data.
+
+4.what is master & minion?
+A.A node is a worker machine in Kubernetes, previously known as a minion . A node may be a VM or physical machine, 
+depending on the cluster. Each node contains the services necessary to run pods and is managed by the master components. 
+The services on a node include the container runtime, kubelet and kube-proxy.
+
+5.how to make quorum of cluster?
+A.
+
+6.what is Replication controller & what it does?
+A.A replication controller (RC) is a supervisor for long-running pods. An RC will launch a specified number of pods 
+called replicas and makes sure that they keep running, for example when a node fails or something inside of a pod,
+ that is, in one of its containers goes wrong.
+
+7.what is ingress?
+A.In Kubernetes, an Ingress is an object that allows access to your Kubernetes services from outside 
+the Kubernetes cluster. You configure access by creating a collection of rules that define which inbound 
+connections reach which services.
+
+8.difference between kubernetes &DockerSwarm?
+A.Kubernetes: An application can be deployed in Kubernetes utilizing a combination of services (or microservices), deployments, and pods.
+
+Docker Swarm: The applications can be deployed as micro-services or services in a swarm cluster in Docker Swarm. YAML(YAML Ain’t Markup Language) 
+files can be utilized to identify multi-container. Moreover, Docker compose can install the application.
+
+
+
+9.how can you rollback the previous version of application in kubernetes?
+A. check status rollout
+$ kubectl rollout status deployment/$DEPLOYMENT
+Read the deployment history
+$ kubectl rollout history deployment/$DEPLOYMENT
+$ kubectl rollout history deployment/$DEPLOYMENT --revision 42
+Rollout Previous deployment
+$ kubectl rollout undo deployment/$DEPLOYMENT
+Rollout to specific deployment
+$ kubectl rollout undo deployment/$DEPLOYMENT --to-revision 21
+
+
+10.how does container know that application is getting failure?
+A.you create a Pod that runs one container. The configuration file specifies a command that runs when the container starts.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: termination-demo
+spec:
+  containers:
+  - name: termination-demo-container
+    image: debian
+    command: ["/bin/sh"]
+    args: ["-c", "sleep 10 && echo Sleep expired > /dev/termination-log"]
+
+In the YAML file, in the cmd and args fields, you can see that the container sleeps for 10 seconds
+ and then writes “Sleep expired” to the /dev/termination-log file.
+ After the container writes the “Sleep expired” message, it terminates.
+
+
+
+11.difference between nodeport,clusterip,load balancer &ingress?
+A.
+
+12.what is kubectl&kubelet?
+A.
+
+13.what is the use of kube-controller manager?
+A.
+
+14.what is pod?
+A.A pod (as in a pod of whales or pea pod) is a group of one or more containers (such as Docker containers),
+ with shared storage/network, and a specification for how to run the containers.
+ A pod's contents are always co-located and co-scheduled, and run in a shared context
+
+15.how many containers can run in a pod?
+A.
+
+16.how many containers can be launched in a node?
+A.
+
+17.what is the role of kube-scheduler?
+A.The Kubernetes scheduler is in charge of scheduling pods onto nodes. 
+Basically it works like this: ... The scheduler assigns a node to the pod.
+
+18.how the 2 pods communicate with each other?
+A.Containers in a Pod run on a “logical host”; they use the same network namespace 
+(in other words, the same IP address and port space), and the same IPC namespace. They can also use shared volumes. 
+These properties make it possible for these containers to efficiently communicate, ensuring data locality.
+
+Each pod has a unique IP address assigned to it. If a pod is running on multiple containers, 
+then the containers can communicate with each other using localhost. When they have to communicate outside the Pod, they expose a port. 
+A Node is a worker machine, a VM or a physical machine which contains services to run pods.
+
+
+
+19.how 2 containers inside a pod communicate with each other?
+A.Containers inside a Pod can communicate with one another using localhost . 
+When containers in a Pod communicate with entities outside the Pod,
+ they must coordinate how they use the shared network resources .
+
+20.what is flannel &why we use it?
+A.
+
+21.difference between flannel&calico?
+A.
+
+22.what is init container?
+A. A Pod can have multiple Containers running apps within it, but it can also have one or more Init Containers, 
+which are run before the app Containers are started. 
+Init Containers are exactly like regular Containers, except: They always run to completion.
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
